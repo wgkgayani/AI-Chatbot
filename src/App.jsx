@@ -1,50 +1,30 @@
-import React from "react";
-import ChatbotIcon from "./components/ChatbotIcon";
+import Header from './components/Header/Header';
+import Hero from './components/Hero/Hero';
+import './App.css'
+import Companies from './components/Companies/Companies'
+import Residencies from './components/Residencies/Residencies';
+import Value from "./components/Value/Value";
+import Contact from "./components/Contact/Contact";
+import GetStarted from "./components/GetStarted/GetStarted";
+import Footer from "./components/Footer/Footer";
 
-const App = () => {
+function App() {
+
   return (
-    <div className="container">
-      <div className="chatbot-popup">
-        {/*chatbot header*/}
-        <div className="chat-header">
-          <div className="header-info">
-            <ChatbotIcon />
-            <h2 className="logo-text">Chatbot</h2>
-          </div>
-          <button className="material-symbols-rounded">
-            keyboard_arrow_down
-          </button>
-        </div>
-        {/*chatbot body*/}
-        <div className="chat-body">
-          <div className="message bot-message">
-            <ChatbotIcon />
-            <p className="message-text">
-              Hey there <br /> How can I help you today?
-            </p>
-          </div>
-
-          <div className="message user-message">
-            <p className="massage-text">
-              Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-            </p>
-          </div>
-        </div>
-
-        <div className="chat-footer">
-          <form action="#" className="chat-form">
-            <input
-              type="text"
-              placeholder="Message..."
-              className="Message-input"
-              required
-            />
-            <button className="material-symbols-rounded">arrow_upward</button>
-          </form>
-        </div>
+    <div className="App">
+      <div>
+        <div className='white-gradient'/>
+        <Header />
+       <Hero />
       </div>
+      <Companies/>
+      <Residencies/>
+      <Value/>
+      <Contact/>
+      <GetStarted/>
+      <Footer/>
     </div>
   );
-};
+}
 
 export default App;
