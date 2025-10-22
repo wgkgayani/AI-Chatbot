@@ -1,0 +1,52 @@
+[
+  {
+    "name": "Mercedes-Maybach Exelero",
+    "price": "8 million",
+    "detail": "Unique one-off high-performance Maybach with custom bodywork, luxury materials.",
+    "image": "./r5.jpg"
+  },
+  {
+    "name": "Pagani Huayra Codalunga",
+    "price": "7.5 million",
+    "detail": "Italian hypercar, limited production, very exclusive long-tail body design.",
+    "image": "./r6.jpg"
+  },
+  {
+    "name": "Citralan Puri Serang",
+    "price": "35,853",
+    "detail": "Ruko Puri Indah Residence Block A7, Lingkar Street, Ciracas, Serang, Banten",
+    "image": "./r7.jpg"
+  },
+  {
+    "name": "Bugatti Divo",
+    "price": "6 million",
+    "detail": "Designed for pure performance and exclusivity. Track capable, very limited numbers.",
+    "image": "./r8.jpg"
+  },
+  {
+    "name": "Rolls-Royce La Rose Noire Droptail",
+    "price": "30 million",
+    "detail": "Ultra-luxury bespoke coach-built car. Only 4 units built.",
+    "image": "./r9.jpg"
+  },
+  {
+    "name": "Rolls-Royce Boat Tail",
+    "price": "28 million",
+    "detail": "Another very exclusive Rolls-Royce, made by coachbuilders.",
+    "image": "./r10.jpg"
+  },
+
+  {
+    "name": "Bugatti La Voiture Noire",
+    "price": "18.7 million",
+    "detail": "One-of-a-kind hypercar from Bugatti; striking design, incredible power and exclusivity.",
+    "image": "./r11.jpg"
+  },
+
+  {
+    "name": "Pagani Zonda HP Barchetta",
+    "price": "17 million",
+    "detail": "Limited edition, high-performance Italian hypercar. Very rare.",
+    "image": "./r12.jpg"
+  }
+]

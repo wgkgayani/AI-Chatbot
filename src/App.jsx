@@ -15,7 +15,7 @@ const App = () => {
       ]);
     };
 
-    //format chat history for API reauest
+    // format chat history for API request
     history = history.map(({ role, text }) => ({ role, parts: [{ text }] }));
 
     const requestOptions = {
@@ -26,15 +26,11 @@ const App = () => {
 
     try {
       // Make the API call to get the bot's response
-      const response = await fetch(
-        import.meta.env.VITE_API_URL,
-        requestOptions
-      );
+      const response = await fetch(import.meta.env.VITE_API_URL, requestOptions);
       const data = await response.json();
-      if (!response.ok)
-        throw new Error(data.error.message || "Something went wrong!");
+      if (!response.ok) throw new Error(data.error?.message || "Something went wrong!");
 
-      //clean and update chat history with bot's response
+      // clean and update chat history with bot's response
       const apiResponseText = data.candidates[0].content.parts[0].text
         .replace(/\*\*(.*?)\*\*/g, "$1")
         .trim();
@@ -53,17 +49,13 @@ const App = () => {
             <ChatbotIcon />
             <h2 className="logo-text">Chatbot</h2>
           </div>
-          <button className="material-symbols-rounded">
-            keyboard_arrow_down
-          </button>
+          <button className="material-symbols-rounded">keyboard_arrow_down</button>
         </div>
         {/*chatbot body*/}
         <div className="chat-body">
           <div className="message bot-message">
             <ChatbotIcon />
-            <p className="message-text">
-              Hey there <br /> How can I help you today?
-            </p>
+            <p className="message-text">Hey there <br /> How can I help you today?</p>
           </div>
 
           {/* render the chat history dynamically*/}
