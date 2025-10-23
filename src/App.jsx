@@ -1,17 +1,19 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import ChatbotIcon from "./components/ChatbotIcon";
 import ChatForm from "./components/ChatForm";
 import ChatMessage from "./components/ChatMessage";
 
 const App = () => {
   const [chatHistory, setChatHistory] = useState([]);
+  const [showchatbot, setShowChatbot] = useState(false);
+  const chatBodyRef = useRef();
 
   const generateBotResponse = async (history) => {
     // Helper funtion to update chat history
-    const updateHistory = (text) => {
+    const updateHistory = (text, isError = false) => {
       setChatHistory((prev) => [
         ...prev.filter((msg) => msg.text !== "Thinking..."),
-        { role: "model", text },
+        { role: "model", text, isError },
       ]);
     };
 
@@ -26,9 +28,13 @@ const App = () => {
 
     try {
       // Make the API call to get the bot's response
-      const response = await fetch(import.meta.env.VITE_API_URL, requestOptions);
+      const response = await fetch(
+        import.meta.env.VITE_API_URL,
+        requestOptions
+      );
       const data = await response.json();
-      if (!response.ok) throw new Error(data.error?.message || "Something went wrong!");
+      if (!response.ok)
+        throw new Error(data.error?.message || "Something went wrong!");
 
       // clean and update chat history with bot's response
       const apiResponseText = data.candidates[0].content.parts[0].text
@@ -36,12 +42,36 @@ const App = () => {
         .trim();
       updateHistory(apiResponseText);
     } catch (error) {
-      console.log(error);
+      updateHistory(error.message, true);
     }
   };
 
+  useEffect(() => {
+    //auto scroll whenever chat history updates
+    chatBodyRef.current.scrollTo({
+      top: chatBodyRef.current.scrollHeight,
+      behavior: "smooth",
+    });
+  }, [chatHistory]);
+
   return (
-    <div className="container">
+    <div className={`container ${showchatbot ? "show-chatbot" : ""}`}>
+      <button
+        onClick={() => setShowChatbot((prev) => !prev)}
+        id="chatbot-toggler"
+      >
+        <span className="material-symbols-rounded">mode_comment</span>
+        <span className="material-symbols-rounded">close</span>
+      </button>
+
+      {/* top body label (not inside chatbot popup) */}
+      <div className="body-top">Chat with me...</div>
+
+      {/* center body icon (not inside chatbot popup) */}
+      <div className="center-icon">
+        <ChatbotIcon />
+      </div>
+
       <div className="chatbot-popup">
         {/*chatbot header*/}
         <div className="chat-header">
@@ -49,13 +79,20 @@ const App = () => {
             <ChatbotIcon />
             <h2 className="logo-text">Chatbot</h2>
           </div>
-          <button className="material-symbols-rounded">keyboard_arrow_down</button>
+          <button
+            onClick={() => setShowChatbot((prev) => !prev)}
+            className="material-symbols-rounded"
+          >
+            keyboard_arrow_down
+          </button>
         </div>
         {/*chatbot body*/}
-        <div className="chat-body">
+        <div ref={chatBodyRef} className="chat-body">
           <div className="message bot-message">
             <ChatbotIcon />
-            <p className="message-text">Hey there <br /> How can I help you today?</p>
+            <p className="message-text">
+              Hey there <br /> How can I help you today?
+            </p>
           </div>
 
           {/* render the chat history dynamically*/}
